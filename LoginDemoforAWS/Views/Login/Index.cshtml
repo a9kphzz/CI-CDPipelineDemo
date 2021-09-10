@@ -1,0 +1,61 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<link rel="stylesheet" media="screen" href="https://www.3m.com/3m_theme_assets/themes/3MTheme/assets/css/unicorn-icons.css" />
+<link rel="stylesheet" media="screen" href="https://www.3m.com/3m_theme_assets/themes/3MTheme/assets/css/build/phoenix.css" />
+<link rel="stylesheet" media="print" href="https://www.3m.com/3m_theme_assets/themes/3MTheme/assets/css/build/unicorn-print.css" />
+<div class="wrap-input100 validate-input m-b-10" data-validate="Email is required">
+    <label>
+        <b>
+            UserName
+        </b>
+    </label>
+    <input class="input100" type="text" name="email" id="email" placeholder="Email">
+
+</div>
+<div class="wrap-input100 validate-input m-b-10" data-validate="Password is required">
+    <label>
+        <b>
+            Password
+        </b>
+    </label>
+    <input class="input100" type="password" name="password" id="password" placeholder="Password">
+
+</div>
+<div class="container-login100-form-btn p-t-10">
+
+    <input type="button" value="Login" class="login100-form-btn" onclick="Validate()">
+</div>
+
+
+
+
+<script>
+    function Validate() {
+        debugger;
+    $.ajax(
+    {
+      type: "POST",
+      url: '@Url.Action("Validate", "Login")',
+      data: {
+        email: $('#email').val(),
+        password: $('#password').val()
+      },
+      error: function (result) {
+        alert("There is a Problem, Try Again!");
+      },
+      success: function (result) {
+        console.log(result);
+        if (result.status == true) {
+          window.location.href = '@Url.Action("Index", "Home")';
+        }
+        else {
+          alert(result.message);
+        }
+      }
+    });
+  }
+</script>
